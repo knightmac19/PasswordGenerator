@@ -135,6 +135,14 @@ button[disabled] {
   overflow: hidden;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
+
 @media (max-width: 768px) {
   .my-col {
     text-align: left;

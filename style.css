@@ -21,6 +21,7 @@ body {
   padding-top: 30px;
   padding-left: 20px;
   padding-right: 20px;
+  
 }
 
 header {
@@ -72,9 +73,25 @@ header {
   clear: both;
 }
 
-.btn {
+.btn-red {
   border: none;
   background-color: hsl(360, 91%, 36%);
+  border-radius: 25px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px
+    0px;
+  color: hsl(0, 0%, 100%);
+  display: inline-block;
+  font-size: 22px;
+  line-height: 22px;
+  margin: 16px 16px 16px 20px;
+  padding: 14px 34px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn-blue {
+  border: none;
+  background-color: rgb(4, 117, 177);
   border-radius: 25px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px
     0px;
@@ -118,8 +135,14 @@ button[disabled] {
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .my-col {
+    text-align: left;
+  }
+}
+
 @media (max-width: 690px) {
-  .btn {
+  .btn-red, .btn-blue {
     font-size: 1rem;
     margin: 16px 0px 0px 0px;
     padding: 10px 15px;
@@ -128,10 +151,41 @@ button[disabled] {
   #password {
     font-size: 1rem;
   }
+
 }
 
+
 @media (max-width: 500px) {
-  .btn {
+  .btn-red, .btn-blue {
     font-size: 0.8rem;
   }
 }
+
+.footer {
+  position: fixed;
+  bottom:0px;
+  height: 30px;
+  /* padding-top:20px; */
+} 
+
+/* .background {
+  background-color:grey;
+}
+
+.red {
+  background-color:red;
+}
+.green {
+  background-color:green;
+}
+.blue {
+  background-color:blue;
+} */
+
+.my-row {
+  padding: 10px;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+

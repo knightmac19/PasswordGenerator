@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Password Generator</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -17,18 +24,46 @@
           <h2>Generate a Password</h2>
         </div>
         <div class="card-body">
-          <textarea
-            readonly
-            id="password"
-            placeholder="Your Secure Password"
-            aria-label="Generated Password"
-          ></textarea>
+          <textarea readonly id="password" placeholder="Your Secure Password" aria-label="Generated Password"></textarea>
+          
+            <div class="row my-row  ">
+              <div class="col-lg-4 col-md-4 col-sm-4 text-left my-col">
+                <input type="radio" id="special" value="special">
+                <label for="special">Special Chars</label><br>
+  
+                <input type="radio" id="numbers" value="numbers">
+                <label for="numbers">Numbers</label>
+              </div>
+
+              <div class="col-lg-4 col-md-4 col-sm-4 text-center my-col">
+                <input id='length' type='number' min='8' max='128'>
+                <label for='length'>Length</label>
+              </div>
+              
+              <div class="col-lg-4 col-md-4 col-sm-4 text-right my-col">
+                <input type="radio" id="lowercase" value="lowercase">
+                <label for="lowercase">Lowercase</label><br>
+  
+                <input type="radio" id="uppercase" value="uppercase">
+                <label for="uppercase">Uppercase</label>
+              </div>
+              
+            </div>
         </div>
+
+
         <div class="card-footer">
-          <button id="generate" class="btn">Generate Password</button>
+          <button id="generate" class="btn-red">Generate Password</button>
+          <button id="copy" class="btn-blue">Copy to Clipboard</button>
         </div>
       </div>
     </div>
+    <div id="footer">
+      <div class="container text-center">
+        <p class="text-muted credit">&copy Patrick Dunn 2021</p>
+      </div>
+    </div>
+    <!-- <footer class="footer center">&copy Patrick Dunn 2021</footer> -->
     <script src="script.js"></script>
   </body>
 </html>

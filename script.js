@@ -1,7 +1,15 @@
 // todo's: 
 //    1) add slider element: https://www.w3schools.com/howto/howto_js_rangeslider.asp
-//    2) change generate button to say 'Refresh' after password initially created
-//    3) restrict users from not having at least one checkbox checked
+
+// slider logic
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
 
 // grabbing elements from the DOM
 var generateBtn = document.querySelector("#generate");

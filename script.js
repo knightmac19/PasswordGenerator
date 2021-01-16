@@ -1,7 +1,14 @@
+// todo's: 
+//    1) add slider element: https://www.w3schools.com/howto/howto_js_rangeslider.asp
+//    2) change generate button to say 'Refresh' after password initially created
+//    3) restrict users from not having at least one checkbox checked
+
 // grabbing elements from the DOM
 var generateBtn = document.querySelector("#generate");
 var copyBtn = document.querySelector('#copy');
 var textBox = document.querySelector("#password");
+generateBtn.textContent = 'Generate';
+copyBtn.textContent = 'Copy';
 
 var specialCheck = document.querySelector('#special');
 var numbersCheck = document.querySelector('#numbers');
@@ -16,26 +23,24 @@ var hasNumericCharacters = false;
 var hasLowerCaseCharacters = false;
 var hasUpperCaseCharacters = false;
 
-
-
 // initialize length & password
 var length = 0;
 var password = '';
-// var possibleString = '';
 
 var specialCharacters = '_!@#$%^&*()-+={}[]~`:;",<>.?/|';
 var numbersCharacters = '0123456789';
 var lowercaseCharacters = 'abcdefghijklmnopqrstuvwxyz';
 var uppercaseCharacters = lowercaseCharacters.toUpperCase();
 
-
 // event listeners for checkboxes & length input
 specialCheck.addEventListener('change', function() {
   if (this.checked) {
     hasSpecialCharacters = true;
     showGenerateBtn();
-  } else {
-    return;
+  };
+  if (!this.checked) {
+    hasSpecialCharacters = false;
+    hideGenerateBtn();
   }
 });
 
@@ -43,8 +48,10 @@ numbersCheck.addEventListener('change', function() {
   if (this.checked) {
     hasNumericCharacters = true;
     showGenerateBtn();
-  } else {
-    return;
+  };
+  if (!this.checked) {
+    hasNumericCharacters = false;
+    hideGenerateBtn();
   }
 });
 
@@ -52,40 +59,73 @@ lowerCheck.addEventListener('change', function() {
   if (this.checked) {
     hasLowerCaseCharacters = true;
     showGenerateBtn();
-  } else {
-    return;
+  };
+  if (!this.checked) {
+    hasLowerCaseCharacters = false;
+    hideGenerateBtn();
   }
 });
 
 upperCheck.addEventListener('change', function() {
   if (this.checked) {
     hasUpperCaseCharacters = true;
-    
     showGenerateBtn();
-  } else {
-    return;
+  };
+  if (!this.checked) {
+    hasUpperCaseCharacters = false;
+    hideGenerateBtn();
   }
 });
 
 lengthInput.addEventListener('change', function() {
-  if (this.value >= 8 && this.value <129) {
+  if (this.value >= 8 && this.value < 41) {
     length = this.value;
     showGenerateBtn();
   } else {
-    return;
+    length = this.value;
+    hideGenerateBtn();
   }
 });
 
+// conditionally displaying or hiding buttons
+function hideGenerateBtn() {
+  if (!hasSpecialCharacters && !hasNumericCharacters && !hasLowerCaseCharacters && !hasUpperCaseCharacters) {
+    removeGenerateBtn();
+    hideCopyBtn();
+    return;
+  } else if (length < 8 || length > 40) {
+    removeGenerateBtn();
+    hideCopyBtn();
+  } else {
+    return;
+  }
+}
+
 function showGenerateBtn() {
-  if (length >= 8 && length < 129) {
+  if (length > 7 && length < 41) {
     if (hasSpecialCharacters || hasNumericCharacters || hasLowerCaseCharacters || hasUpperCaseCharacters) {
-      generateBtn.classList.remove('invisible');
-      generateBtn.classList.add('visible');
+      displayGenerateBtn();
     }
     return;
   } 
   return;
 };
+
+// adding and removing css classes
+function displayGenerateBtn() {
+  generateBtn.classList.remove('invisible');
+  generateBtn.classList.add('visible');
+}
+
+function removeGenerateBtn() {
+  generateBtn.classList.remove('visible');
+  generateBtn.classList.add('invisible');
+}
+
+function hideCopyBtn() {
+  copyBtn.classList.remove('visible');
+  copyBtn.classList.add('invisible');
+}
 
 function showCopyBtn() {
   copyBtn.classList.remove('invisible');
@@ -94,6 +134,7 @@ function showCopyBtn() {
 
 // Write password to the #password input
 function writePassword() {
+  copyBtn.textContent = 'Copy';
   var options = {
     hasSpecialCharacters: hasSpecialCharacters,
     hasNumericCharacters: hasNumericCharacters,
@@ -104,7 +145,6 @@ function writePassword() {
 
   let possibleCharacters = [];
   let shuffled = [];  
-  // console.log(options);
 
   if (options.hasLowerCaseCharacters) {
     for (var i = 0; i < lowercaseCharacters.length; i++) {
@@ -138,6 +178,7 @@ function writePassword() {
   
   // lastly, make copy button visible
   showCopyBtn();
+  generateBtn.textContent = 'Refresh';
 };
 
 // take in shuffled array and length parameter, return randomized array
@@ -173,6 +214,7 @@ function copyToClipboard() {
   textBox.setSelectionRange(0, 99999); /* For mobile devices */
   
   document.execCommand("copy");
+  copyBtn.textContent = 'Copied!';
 
   // alert("Password copied: " + textBox.value);
 };
@@ -180,5 +222,3 @@ function copyToClipboard() {
 // Add event listeners to generate & copy buttons
 generateBtn.addEventListener("click", writePassword);
 copyBtn.addEventListener("click", copyToClipboard);
-
-

@@ -77,13 +77,12 @@ lengthInput.addEventListener('change', function() {
 });
 
 function showGenerateBtn() {
-  if (length != 0) {
-    if (hasSpecialCharacters || hasNumericCharacters|| lowercase || uppercase) {
+  if (length >= 8 && length < 129) {
+    if (hasSpecialCharacters || hasNumericCharacters || hasLowerCaseCharacters || hasUpperCaseCharacters) {
       generateBtn.classList.remove('invisible');
       generateBtn.classList.add('visible');
-    } else {
-      return;
     }
+    return;
   } 
   return;
 };
@@ -92,8 +91,7 @@ function showCopyBtn() {
   copyBtn.classList.remove('invisible');
   copyBtn.classList.add('visible');
 };
-let possibleCharacters = [];
-let shuffled = [];  
+
 // Write password to the #password input
 function writePassword() {
   var options = {
@@ -103,8 +101,10 @@ function writePassword() {
     hasUpperCaseCharacters: hasUpperCaseCharacters,
     length: length
   };
-  console.log(options);
-  let definiteArray = [];
+
+  let possibleCharacters = [];
+  let shuffled = [];  
+  // console.log(options);
 
   if (options.hasLowerCaseCharacters) {
     for (var i = 0; i < lowercaseCharacters.length; i++) {
@@ -131,16 +131,13 @@ function writePassword() {
   };
   
   shuffled = shuffleArray(possibleCharacters);
-  
 
   password = generatePassword(shuffled, length);
   
   textBox.value = password;
   
-  
   // lastly, make copy button visible
   showCopyBtn();
-
 };
 
 // take in shuffled array and length parameter, return randomized array
@@ -177,7 +174,7 @@ function copyToClipboard() {
   
   document.execCommand("copy");
 
-  alert("Password copied: " + textBox.value);
+  // alert("Password copied: " + textBox.value);
 };
 
 // Add event listeners to generate & copy buttons

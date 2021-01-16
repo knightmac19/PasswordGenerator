@@ -1,6 +1,8 @@
 // grabbing elements from the DOM
 var generateBtn = document.querySelector("#generate");
 var copyBtn = document.querySelector('#copy');
+var textBox = document.querySelector("#password");
+
 var specialCheck = document.querySelector('#special');
 var numbersCheck = document.querySelector('#numbers');
 var lowerCheck = document.querySelector('#lowercase');
@@ -9,19 +11,28 @@ var lengthInput = document.querySelector('#length');
 
 // boolean status checkers
 var generated = false;
-var specialChars = false;
-var numbers = false;
-let lowercase = false;
-var uppercase = false;
+var hasSpecialCharacters = false;
+var hasNumericCharacters = false;
+var hasLowerCaseCharacters = false;
+var hasUpperCaseCharacters = false;
+
+
 
 // initialize length & password
 var length = 0;
 var password = '';
+// var possibleString = '';
+
+var specialCharacters = '_!@#$%^&*()-+={}[]~`:;",<>.?/|';
+var numbersCharacters = '0123456789';
+var lowercaseCharacters = 'abcdefghijklmnopqrstuvwxyz';
+var uppercaseCharacters = lowercaseCharacters.toUpperCase();
+
 
 // event listeners for checkboxes & length input
 specialCheck.addEventListener('change', function() {
   if (this.checked) {
-    specialChars = true;
+    hasSpecialCharacters = true;
     showGenerateBtn();
   } else {
     return;
@@ -30,7 +41,7 @@ specialCheck.addEventListener('change', function() {
 
 numbersCheck.addEventListener('change', function() {
   if (this.checked) {
-    numbers = true;
+    hasNumericCharacters = true;
     showGenerateBtn();
   } else {
     return;
@@ -39,7 +50,7 @@ numbersCheck.addEventListener('change', function() {
 
 lowerCheck.addEventListener('change', function() {
   if (this.checked) {
-    lowercase = true;
+    hasLowerCaseCharacters = true;
     showGenerateBtn();
   } else {
     return;
@@ -48,7 +59,7 @@ lowerCheck.addEventListener('change', function() {
 
 upperCheck.addEventListener('change', function() {
   if (this.checked) {
-    uppercase = true;
+    hasUpperCaseCharacters = true;
     
     showGenerateBtn();
   } else {
@@ -67,7 +78,7 @@ lengthInput.addEventListener('change', function() {
 
 function showGenerateBtn() {
   if (length != 0) {
-    if (specialChars || numbers || lowercase || uppercase) {
+    if (hasSpecialCharacters || hasNumericCharacters|| lowercase || uppercase) {
       generateBtn.classList.remove('invisible');
       generateBtn.classList.add('visible');
     } else {
@@ -81,30 +92,92 @@ function showCopyBtn() {
   copyBtn.classList.remove('invisible');
   copyBtn.classList.add('visible');
 };
-
+let possibleCharacters = [];
+let shuffled = [];  
 // Write password to the #password input
 function writePassword() {
+  var options = {
+    hasSpecialCharacters: hasSpecialCharacters,
+    hasNumericCharacters: hasNumericCharacters,
+    hasLowerCaseCharacters: hasLowerCaseCharacters,
+    hasUpperCaseCharacters: hasUpperCaseCharacters,
+    length: length
+  };
+  console.log(options);
+  let definiteArray = [];
 
-  // var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+  if (options.hasLowerCaseCharacters) {
+    for (var i = 0; i < lowercaseCharacters.length; i++) {
+      possibleCharacters.push(lowercaseCharacters[i]);
+    }
+  };
 
-  password = passwordText.value;
+  if (options.hasUpperCaseCharacters) {
+    for (var i = 0; i < uppercaseCharacters.length; i++) {
+      possibleCharacters.push(uppercaseCharacters[i]);
+    }
+  };
+
+  if (options.hasSpecialCharacters) {
+    for (var i = 0; i < specialCharacters.length; i++) {
+      possibleCharacters.push(specialCharacters[i]);
+    }
+  };
+
+  if (options.hasNumericCharacters) {
+    for (var i = 0; i < numbersCharacters.length; i++) {
+      possibleCharacters.push(numbersCharacters[i]);
+    }
+  };
+  
+  shuffled = shuffleArray(possibleCharacters);
+  
+
+  password = generatePassword(shuffled, length);
+  
+  textBox.value = password;
+  
   
   // lastly, make copy button visible
   showCopyBtn();
 
 };
 
+// take in shuffled array and length parameter, return randomized array
+function generatePassword(arr, len) {
+  let result = [];
+  for (var i = 0; i < len; i++) {
+    result.push(getRandom(arr));
+  }
+  return result.join('');
+}
+
+// returns one random element from an array
+function getRandom(arr) {
+  var item = arr[Math.floor(Math.random() * arr.length)];
+  return item;
+}
+
+// takes in an array and returns shuffled array
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+  }
+  return array;
+};
+
 // copy functionality
 function copyToClipboard() {
-  var copyText = document.getElementById("password");
   
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+  textBox.select();
+  textBox.setSelectionRange(0, 99999); /* For mobile devices */
   
   document.execCommand("copy");
 
-  alert("Password copied: " + copyText.value);
+  alert("Password copied: " + textBox.value);
 };
 
 // Add event listeners to generate & copy buttons

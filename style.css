@@ -176,7 +176,7 @@ button[disabled] {
   /* padding-top:20px; */
 } 
 
-/* .background {
+.background {
   background-color:grey;
 }
 
@@ -188,7 +188,7 @@ button[disabled] {
 }
 .blue {
   background-color:blue;
-} */
+}
 
 .my-row {
   padding: 10px;

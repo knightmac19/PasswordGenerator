@@ -1,6 +1,10 @@
 // todo's: 
 //    1) add slider element: https://www.w3schools.com/howto/howto_js_rangeslider.asp
 
+// initialize length & password
+
+var password = '';
+
 // slider logic
 var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");
@@ -9,6 +13,8 @@ output.innerHTML = slider.value; // Display the default slider value
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
   output.innerHTML = this.value;
+  length = this.value;
+  console.log('length' + length)
 }
 
 // grabbing elements from the DOM
@@ -22,18 +28,23 @@ var specialCheck = document.querySelector('#special');
 var numbersCheck = document.querySelector('#numbers');
 var lowerCheck = document.querySelector('#lowercase');
 var upperCheck = document.querySelector('#uppercase');
-var lengthInput = document.querySelector('#length');
+
+// presetting options
+specialCheck.checked = true;
+numbersCheck.checked = true;
+lowerCheck.checked = true;
+upperCheck.checked = true;
+var length = 18;
+
+// var lengthInput = document.querySelector('#length');
 
 // boolean status checkers
-var generated = false;
-var hasSpecialCharacters = false;
-var hasNumericCharacters = false;
-var hasLowerCaseCharacters = false;
-var hasUpperCaseCharacters = false;
+var hasSpecialCharacters = true;
+var hasNumericCharacters = true;
+var hasLowerCaseCharacters = true;
+var hasUpperCaseCharacters = true;
 
-// initialize length & password
-var length = 0;
-var password = '';
+
 
 var specialCharacters = '_!@#$%^&*()-+={}[]~`:;",<>.?/|';
 var numbersCharacters = '0123456789';
@@ -85,38 +96,20 @@ upperCheck.addEventListener('change', function() {
   }
 });
 
-lengthInput.addEventListener('change', function() {
-  if (this.value >= 8 && this.value < 41) {
-    length = this.value;
-    showGenerateBtn();
-  } else {
-    length = this.value;
-    hideGenerateBtn();
-  }
-});
-
 // conditionally displaying or hiding buttons
 function hideGenerateBtn() {
   if (!hasSpecialCharacters && !hasNumericCharacters && !hasLowerCaseCharacters && !hasUpperCaseCharacters) {
     removeGenerateBtn();
     hideCopyBtn();
-    return;
-  } else if (length < 8 || length > 40) {
-    removeGenerateBtn();
-    hideCopyBtn();
-  } else {
-    return;
-  }
+  }; 
+  return;
 }
 
 function showGenerateBtn() {
-  if (length > 7 && length < 41) {
     if (hasSpecialCharacters || hasNumericCharacters || hasLowerCaseCharacters || hasUpperCaseCharacters) {
       displayGenerateBtn();
     }
     return;
-  } 
-  return;
 };
 
 // adding and removing css classes

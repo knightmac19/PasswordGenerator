@@ -1,26 +1,10 @@
-// todo's: 
-//    1) add slider element: https://www.w3schools.com/howto/howto_js_rangeslider.asp
-
-// initialize length & password
-
-var password = '';
-
-// slider logic
-var slider = document.getElementById("myRange");
-var output = document.getElementById("demo");
-output.innerHTML = slider.value; // Display the default slider value
-
-// Update the current slider value (each time you drag the slider handle)
-slider.oninput = function() {
-  output.innerHTML = this.value;
-  length = this.value;
-  console.log('length' + length)
-}
-
 // grabbing elements from the DOM
 var generateBtn = document.querySelector("#generate");
 var copyBtn = document.querySelector('#copy');
 var textBox = document.querySelector("#password");
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value; // Display the default slider value
 generateBtn.textContent = 'Generate';
 copyBtn.textContent = 'Copy';
 
@@ -29,29 +13,32 @@ var numbersCheck = document.querySelector('#numbers');
 var lowerCheck = document.querySelector('#lowercase');
 var upperCheck = document.querySelector('#uppercase');
 
-// presetting options
+// presetting UI checkboxes & slider length
 specialCheck.checked = true;
 numbersCheck.checked = true;
 lowerCheck.checked = true;
 upperCheck.checked = true;
-var length = 18;
 
-// var lengthInput = document.querySelector('#length');
-
-// boolean status checkers
+// presetting password options
 var hasSpecialCharacters = true;
 var hasNumericCharacters = true;
 var hasLowerCaseCharacters = true;
 var hasUpperCaseCharacters = true;
+var length = 18;
+var password = '';
 
-
-
+// character types strings
 var specialCharacters = '_!@#$%^&*()-+={}[]~`:;",<>.?/|';
 var numbersCharacters = '0123456789';
 var lowercaseCharacters = 'abcdefghijklmnopqrstuvwxyz';
 var uppercaseCharacters = lowercaseCharacters.toUpperCase();
 
-// event listeners for checkboxes & length input
+// event listeners for slider & checkboxes
+slider.oninput = function() {
+  output.innerHTML = this.value;
+  length = this.value;
+};
+
 specialCheck.addEventListener('change', function() {
   if (this.checked) {
     hasSpecialCharacters = true;
@@ -133,9 +120,11 @@ function showCopyBtn() {
   copyBtn.classList.add('visible');
 };
 
-// Write password to the #password input
+// Write password to the #password textarea
 function writePassword() {
+  // reset copy btn if necessary
   copyBtn.textContent = 'Copy';
+  
   var options = {
     hasSpecialCharacters: hasSpecialCharacters,
     hasNumericCharacters: hasNumericCharacters,
@@ -179,6 +168,7 @@ function writePassword() {
   
   // lastly, make copy button visible
   showCopyBtn();
+  
   generateBtn.textContent = 'Refresh';
 };
 
@@ -216,8 +206,6 @@ function copyToClipboard() {
   
   document.execCommand("copy");
   copyBtn.textContent = 'Copied!';
-
-  // alert("Password copied: " + textBox.value);
 };
 
 // Add event listeners to generate & copy buttons

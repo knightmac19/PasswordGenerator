@@ -21,7 +21,7 @@ body {
   padding-top: 30px;
   padding-left: 20px;
   padding-right: 20px;
-  
+  /* margin-bottom: 200px; */
 }
 
 header {
@@ -169,10 +169,13 @@ button[disabled] {
   .btn-red, .btn-blue {
     font-size: 0.8rem;
   }
+  .wrapper {
+    margin-bottom: 180px;
+  }
 }
 
 .footer {
-  position: fixed;
+  position: absolute;
   bottom:0px;
   height: 30px;
   /* padding-top:20px; */

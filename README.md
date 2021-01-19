@@ -43,11 +43,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## <a name="contributors"></a> Contributors
 [Contents](#contents)  
-Patrick Dunn [knightmac19](https://github.com/knightmac19)
+Patrick Dunn // [knightmac19](https://github.com/knightmac19)
 
 Email me with questions &/or suggestions at [pmdunn78@gmail.com](mailto:pmdunn78@gmail.com)
 
-CSS & HTML starter files from Trilogy Full Stack Flex Bootcamp
+CSS & HTML starter files from Trilogy Full Stack Flex Bootcamp.
 
 
 

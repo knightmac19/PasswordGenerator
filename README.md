@@ -23,13 +23,13 @@ Upon page load, the app displays the character presets and a default length of 1
 ## <a name="screenshots"></a> Screenshots
 [Contents](#contents)  
 
-![passGen1]()  
+![passGen1](https://github.com/knightmac19/PasswordGenerator/blob/main/assets/img/passGen1.png)  
 
-![passGen1]()  
+![passGen2](https://github.com/knightmac19/PasswordGenerator/blob/main/assets/img/passGen2.png)  
 
-![passGen1]()  
+![passGen3](https://github.com/knightmac19/PasswordGenerator/blob/main/assets/img/passGen3.png)  
 
-![passGen1]()  
+![passGen4](https://github.com/knightmac19/PasswordGenerator/blob/main/assets/img/passGen4.png)  
 
 ## <a name="license"></a> License
 [Contents](#contents)  
